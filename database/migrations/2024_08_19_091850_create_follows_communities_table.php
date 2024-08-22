@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('_run_mate', function (Blueprint $table) {
-            $table->string('image', 100)->nullable();
+        Schema::create('follows_communities', function (Blueprint $table) {
+            $table->bigIncrements('id'); // Primary Key
+	    $table->unsignedBigInteger('community_id'); // Foreign Key to communities table
+	    $table->unsignedBigInteger('user_id'); // Foreign Key to users table
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('_run_mate', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('follows_communities');
     }
 };
